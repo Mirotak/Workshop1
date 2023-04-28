@@ -1,6 +1,7 @@
 package pl.coderslab;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -13,12 +14,7 @@ public class TaskManager {
     
 
     public static void main(String[] args) {
-        System.out.println("args = "        );
 
-            String str = "Programuj z CodersLab!";
-            System.out.println(StringUtils.deleteWhitespace(str));
-            System.out.println(StringUtils.reverse(str));
-            System.out.println(StringUtils.swapCase(str));
 
 
 
