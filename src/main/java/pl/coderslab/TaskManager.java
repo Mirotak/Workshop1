@@ -1,7 +1,6 @@
 package pl.coderslab;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.commons.lang3.*; //zastepuje 'import org.apache.commons.lang3.StringUtils;' oraz 'import org.apache.commons.lang3.math.NumberUtils;'
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
