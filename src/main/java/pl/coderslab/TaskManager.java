@@ -3,6 +3,8 @@ package pl.coderslab;
 import org.apache.commons.lang3.*; //zastepuje 'import org.apache.commons.lang3.StringUtils;' oraz 'import org.apache.commons.lang3.math.NumberUtils;'
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.sql.SQLOutput;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class TaskManager {
@@ -15,8 +17,17 @@ public class TaskManager {
     public static void main(String[] args) {
 
 
-     //   Scanner select = new Scanner(System.in);
-        String selectWithMenu = "l";
+        Scanner scan = new Scanner(System.in);
+
+
+
+        System.out.println("Please select an option: ");
+        for (int i = 0; i < OPTIONS.length; i++) {
+            System.out.println(OPTIONS[i]);
+            
+        }
+        String selectWithMenu = scan.nextLine();
+
         switch (selectWithMenu) {
 //            case 'e':
 //                selectWithMenu = "exit";
@@ -30,7 +41,7 @@ public class TaskManager {
 //                selectWithMenu = "remove";
 //                // removeTask;
 //                break;
-            case "l":
+            case "list":
                 selectWithMenu = "list";
                 // listTasks;
                 break;
