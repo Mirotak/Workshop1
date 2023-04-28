@@ -7,9 +7,9 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class TaskManager {
-    /*static final String FILE_NAME = "tasks.csv";
+    static final String FILE_NAME = "tasks.csv";
     static final String[] OPTIONS = {"add", "remove", "list", "exit"};
-    static String[][] task;*/
+    static String[][] task;
 
     
 
