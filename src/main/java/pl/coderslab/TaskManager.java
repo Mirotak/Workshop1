@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class TaskManager {
-    static final String FILE_NAME = "tasks.csv";
+    static final String FILE_NAME = "tasks1.csv";
     static final String[] OPTIONS = {"add", "remove", "list", "exit"};
     static String[][] task;
 
@@ -19,14 +19,14 @@ public class TaskManager {
 
         Scanner scan = new Scanner(System.in);
 
-
-
-        System.out.println("Please select an option: ");
+        System.out.println(ConsoleColors.BLUE_BOLD + "Please select an option:" + ConsoleColors.RESET);
         for (int i = 0; i < OPTIONS.length; i++) {
-            System.out.println(OPTIONS[i]);
-            
+            System.out.println();
+            System.out.print(ConsoleColors.GREEN + OPTIONS[i] + ConsoleColors.RESET);
+
         }
         String selectWithMenu = scan.nextLine();
+        System.out.println();
 
         switch (selectWithMenu) {
 //            case 'e':
@@ -53,11 +53,7 @@ public class TaskManager {
 
 
 
-
-
-
-
-       /* File file = new File("tasks.csv");
+       /* File file = new File("tasks1.csv");
         StringBuilder reading = new StringBuilder();
         try {
             Scanner scan = new Scanner(file);
@@ -70,5 +66,13 @@ public class TaskManager {
         System.out.println(reading);
         System.out.println();*/
     }
+
+   /* private static listTasks(String[][]){
+
+
+    }*/
+
+
+
 
 }

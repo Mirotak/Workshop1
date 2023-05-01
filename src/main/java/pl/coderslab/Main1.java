@@ -1,9 +1,27 @@
 package pl.coderslab;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main1 {
     public static void main(String[] args) {
+
+
+        File file = new File("tasks1.csv");
+        StringBuilder reading = new StringBuilder();
+        try {
+            Scanner scan = new Scanner(file);
+            while (scan.hasNextLine()) {
+                reading.append(scan.nextLine() + "\n");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Brak pliku.");
+        }
+        System.out.println(reading);
+        System.out.println();
 
     }
     /*public static void main(String[] args) {
