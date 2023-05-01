@@ -19,20 +19,27 @@ public class TaskManager {
 
         Scanner scan = new Scanner(System.in);
 
+
+
+        boolean isRunMenu = true;
         System.out.println(ConsoleColors.BLUE_BOLD + "Please select an option:" + ConsoleColors.RESET);
-        for (int i = 0; i < OPTIONS.length; i++) {
+        while (isRunMenu){
+
+            for (int i = 0; i < OPTIONS.length; i++) {
+                System.out.println();
+                System.out.print(ConsoleColors.GREEN + OPTIONS[i] + ConsoleColors.RESET);
+
+            }
+
+            String selectWithMenu = scan.next();
             System.out.println();
-            System.out.print(ConsoleColors.GREEN + OPTIONS[i] + ConsoleColors.RESET);
 
-        }
-        String selectWithMenu = scan.nextLine();
-        System.out.println();
-
-        switch (selectWithMenu) {
-//            case 'e':
-//                selectWithMenu = "exit";
-//                //
-//                break;
+            switch (selectWithMenu) {
+              case "exit":
+                selectWithMenu = "exit";
+                isRunMenu = false;
+                //
+                break;
 //            case 'a':
 //                selectWithMenu = "add";
 //              //  addTask;
@@ -41,15 +48,17 @@ public class TaskManager {
 //                selectWithMenu = "remove";
 //                // removeTask;
 //                break;
-            case "list":
-                selectWithMenu = "list";
-                // listTasks;
-                break;
-            default:
-                selectWithMenu = "Please select a correct option . ";
-                break;
+                case "list":
+                    selectWithMenu = "list";
+                    // listTasks;
+                    break;
+                default:
+                    selectWithMenu = (ConsoleColors.RED_BOLD_BRIGHT + "Please select a correct option . " + ConsoleColors.RESET);
+                    break;
+              }
+
+            System.out.println(selectWithMenu);
         }
-        System.out.println(selectWithMenu);
 
 
 
@@ -67,7 +76,10 @@ public class TaskManager {
         System.out.println();*/
     }
 
-   /* private static listTasks(String[][]){
+   /* public static void listTasks(String[][]){
+        for (int i = 0; i < ; i++) {
+
+        }
 
 
     }*/
