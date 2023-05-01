@@ -10,7 +10,7 @@ public class Main1 {
     public static void main(String[] args) {
 
 
-        File file = new File("tasks1.csv");
+      /*  File file = new File("tasks1.csv");
         StringBuilder reading = new StringBuilder();
         try {
             Scanner scan = new Scanner(file);
@@ -21,7 +21,7 @@ public class Main1 {
             System.out.println("Brak pliku.");
         }
         System.out.println(reading);
-        System.out.println();
+        System.out.println();*/
 
     }
     /*public static void main(String[] args) {
