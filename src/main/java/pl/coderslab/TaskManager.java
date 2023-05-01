@@ -37,6 +37,7 @@ public class TaskManager {
                 System.out.print(ConsoleColors.GREEN + OPTIONS[i] + ConsoleColors.RESET);
 
             }
+            System.out.println();
 
             String selectWithMenu = scan.next();
             System.out.println();
@@ -80,8 +81,10 @@ public class TaskManager {
             StringBuilder reading = new StringBuilder();
             try {
                 Scanner scan = new Scanner(file);
+                int i = 0;
                 while (scan.hasNextLine()) {
-                    reading.append(scan.nextLine() + "\n");
+                    reading.append(i + ":" + scan.nextLine() + "\n");
+                    i++;
                 }
             } catch (FileNotFoundException e) {
                 System.out.println("File not found");
