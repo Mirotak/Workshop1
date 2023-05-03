@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class Main1 {
     static final String FILE_NAME = "tasks1.csv";
     static String[][] tasks;
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
 
 
           /*  File file = new File("tasks1.csv");
@@ -47,7 +47,7 @@ public class Main1 {
 
                 }*/
 
-      //  fiteDataToArray();
+        fileDataToArray();
 
     }
 
@@ -68,6 +68,11 @@ public class Main1 {
             String lestComma = sbToString.substring(0, sbToString.length()-2).trim(); //delete the lest comma = ',' (comm + space) and trim space
 
             String[] parts = lestComma.split(", "); //division String on parts Array 'comma + space'
+
+            for (int i = 0; i < parts.length; i = i + 3) {     //readind from Array
+                System.out.println(parts[i] + " " + parts[i + 1] + " " + parts[i + 2]);
+
+            }
 
 //            String[] nameTask = new String[]{""};
 //            String[] dataTask = new String[]{""};

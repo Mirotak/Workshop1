@@ -2,11 +2,6 @@ package pl.coderslab;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class TaskManager {
@@ -18,6 +13,7 @@ public class TaskManager {
     public static void main(String[] args) {
 
         fileDataToArray();
+       // System.out.println("tasks = " + tasks);
         menu();
 
     }
@@ -68,8 +64,9 @@ public class TaskManager {
     }
 
     public static void addTask(){
-        Scanner scan_addTask = new Scanner(System.in);
-       // reading.append(scan.nextLine()).append(", ");
+
+//        Scanner scan_addTask = new Scanner(System.in);
+//          reading.append(scan.nextLine()).append(", ");
 //        tasks = Arrays.copyOf(tasks, tasks.length +1);
 //        tasks[tasks.length - 1] = new String[3];
 //        System.out.println("Please add task description");
@@ -80,7 +77,7 @@ public class TaskManager {
 //        tasks[tasks.length - 1][2] = scan_addTask.nextLine();
     }
 
-    public static void fileDataToArray()  {
+    public static void fileDataToArray() {
 
         try {
             StringBuilder reading = new StringBuilder();
@@ -94,13 +91,10 @@ public class TaskManager {
 
             String sbToString = reading.toString();     //change StringBuilder to String
 
-            String lestComma = sbToString.substring(0, sbToString.length()-2).trim(); //delete the lest comma = ',' (comm + space) and trim space
+            String lestComma = sbToString.substring(0, sbToString.length() - 2).trim(); //delete the lest comma = ',' (comm + space) and trim space
 
-            String[] parts = lestComma.split(", "); //division String on parts Array 'comma + space'
+            String[] parts = lestComma.split(", ");
 
-//            String[] nameTask = "";
-//            String[] dataTask = "";
-//            String[] importantTask = "";
 
             for (int i = 0; i < parts.length; i = i + 3) {     //readind from Array
                 System.out.println(parts[i] + " " + parts[i + 1] + " " + parts[i + 2]);
@@ -110,7 +104,8 @@ public class TaskManager {
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
 
-          }
+        }
+
 
     }
 
