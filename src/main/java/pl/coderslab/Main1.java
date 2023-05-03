@@ -1,7 +1,5 @@
 package pl.coderslab;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -15,13 +13,11 @@ import java.util.Scanner;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main1 {
     static final String FILE_NAME = "tasks1.csv";
-    static String[][] tasks = null;
-    public static void main(String[] args) {
+    static String[][] tasks;
+    public static void main(String[] args) throws IOException {
 
 
-
-
-            File file = new File("tasks1.csv");
+          /*  File file = new File("tasks1.csv");
             try {
                 Scanner scan = new Scanner(file);
                 String str = "";
@@ -34,6 +30,11 @@ public class Main1 {
 
                 System.out.println("strArr = " + Arrays.toString(strArr));
 
+                for (int i = 0; i < 9; i = i + 3) {
+                    System.out.println("strArr = " + strArr[i]);
+
+                }
+
                 String strFile = Arrays.toString(strArr);   //change Array to String File
                 Path path1 = Paths.get("text5a.txt");   //create file
                 Files.writeString(path1,strFile);           // copy String text to File
@@ -44,10 +45,71 @@ public class Main1 {
               } catch (IOException ex){
                 System.out.println("File cannot be saved !");
 
-                }
+                }*/
 
+      //  fiteDataToArray();
 
     }
+
+
+
+    /*String strFile = Arrays.toString(parts);   //change Array to String File
+
+            System.out.println("strFile = " + strFile);
+
+            Path path1 = Paths.get("text5a.csv");   //create file
+            Files.writeString(path1,strFile);           // copy String text to File
+*/
+
+
+
+    /* // read data with file and write to array
+    public static String [][] fileDataToArray(){
+
+        try {
+            File file = new File(FILE_NAME);
+            Path path = Paths.get(FILE_NAME);
+            int linesArray = (int) Files.lines(path).count();   // count lines and change on integer
+            Scanner scan = new Scanner(file);
+
+            int partsLine = 3 ;
+            String[][] tasks = new String[linesArray][partsLine];
+
+            for (int i = 0; i < linesArray; i++) {
+                String line = scan.nextLine();            //read line
+                String[] parts = line.split(", ");  // cut line on parts
+
+                for (int j = 0; j < partsLine; j++){      // parts of line
+                    tasks[i][j] = parts[j];
+
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("File not found.");
+          }
+          catch (IOException ex){
+            ex.printStackTrace();
+          }
+    return tasks;
+
+    }*/
+
+    /*private static void getList(){
+        tasks = new String[0][3];
+        try{
+            for(String s : Files.readAllLines(Path.of("tasks1.csv"))) {
+                String[] nextTab = s.trim().split(",");
+                tasks = Arrays.copyOf(tasks, tasks.length + 1);
+                tasks[tasks.length - 1] = nextTab;
+            }
+        }catch (FileNotFoundException e) {
+            System.out.println("File not exist");
+        }catch (IOException e){
+            System.out.println(e);
+        }
+    }*/
 
     /*public static String[][] readData(String fileName) {
         String[][] tab = null;

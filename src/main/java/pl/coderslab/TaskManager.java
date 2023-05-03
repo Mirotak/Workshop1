@@ -1,25 +1,22 @@
 package pl.coderslab;
 
-import org.apache.commons.lang3.*; //zastepuje 'import org.apache.commons.lang3.StringUtils;' oraz 'import org.apache.commons.lang3.math.NumberUtils;'
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.SQLOutput;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class TaskManager {
-    static final String FILE_NAME = "tasks1.csv";
+    static final String FILE_NAME = "tasks1.csv"; //worked file delete 'tasks1.csv' and please change on 'tasks.csv'
     static final String[] OPTIONS = {"add", "remove", "list", "exit"};
-    static String[][] tasks = null;
+    static String[][] tasks;
 
 
     public static void main(String[] args) {
 
+        fileDataToArray();
         menu();
 
     }
@@ -29,7 +26,7 @@ public class TaskManager {
 
         Scanner scan = new Scanner(System.in);
         boolean isRunMenu = true;
-        while (isRunMenu) {          //repeat until the condition 'isRuMenu' is true
+        while (isRunMenu) {                 //repeat until the condition 'isRuMenu' is true
             System.out.println(ConsoleColors.BLUE_BOLD + "Please select an option:" + ConsoleColors.RESET);
             for (int i = 0; i < OPTIONS.length; i++) {
                 System.out.println();
@@ -70,11 +67,44 @@ public class TaskManager {
         }
     }
 
+    public static void fileDataToArray()  {
+
+        try {
+            StringBuilder reading = new StringBuilder();
+            File file = new File(FILE_NAME);
+            Scanner scan = new Scanner(file);
+
+            while (scan.hasNextLine()) {
+                reading.append(scan.nextLine()).append(", ");
+
+            }
+
+            String sbToString = reading.toString();     //change StringBuilder to String
+
+            String lestComma = sbToString.substring(0, sbToString.length()-2).trim(); //delete the lest comma = ',' (comm + space) and trim space
+
+            String[] parts = lestComma.split(", "); //division String on parts Array 'comma + space'
+
+            for (int i = 0; i < parts.length; i = i + 3) {     //readind from Array
+                String nameTask = parts[i];
+                String dataTask = parts[i + 1];
+                String importantTask = parts[i + 2];
+
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+
+        }
+
+
+    }
+
+
     // list tasks in file
     public static void listTasks(){
 
-        //    File file = new File("tasks.csv");
-            File file = new File("tasks1.csv"); //opction working to delete
+            File file = new File(FILE_NAME);
             StringBuilder reading = new StringBuilder();
             try {
                 Scanner scan = new Scanner(file);
@@ -90,38 +120,9 @@ public class TaskManager {
 
     }
 
-    // read data with file and write to array
-    public static String [][] fileToArray(){
 
-        try {
-            File file = new File(FILE_NAME);
-            Path path = Paths.get(FILE_NAME);
-            int linesArray = (int) Files.lines(path).count();   // count lines and change on integer
-            Scanner scan = new Scanner(file);
 
-            int partsLine = 3 ;
-            String[][] tasks = new String[linesArray][partsLine];
 
-            for (int i = 0; i < linesArray; i++) {
-                String line = scan.nextLine();            //read line
-                String[] parts = line.split(", ");  // cut line on parts
-
-                for (int j = 0; j < partsLine; j++){      // parts of line
-                    tasks[i][j] = parts[j];
-
-                }
-            }
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            System.out.println("File not found.");
-          }
-          catch (IOException ex){
-            ex.printStackTrace();
-          }
-    return tasks;
-
-    }
 
 
 }
