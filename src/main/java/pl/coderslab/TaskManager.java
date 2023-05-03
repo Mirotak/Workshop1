@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class TaskManager {
@@ -45,12 +46,12 @@ public class TaskManager {
                     break;
 
                 case "add":
-                    //  addTask;
+                      addTask();
                     System.out.println("wybrano add");
                     break;
 
                 case "remove":
-                    // removeTask;
+                    // removeTask();
                     System.out.println("wybrano remove");
                     break;
 
@@ -63,8 +64,20 @@ public class TaskManager {
                     break;
             }
 
-
         }
+    }
+
+    public static void addTask(){
+        Scanner scan_addTask = new Scanner(System.in);
+       // reading.append(scan.nextLine()).append(", ");
+//        tasks = Arrays.copyOf(tasks, tasks.length +1);
+//        tasks[tasks.length - 1] = new String[3];
+//        System.out.println("Please add task description");
+//        tasks[tasks.length - 1][0] = scan_addTask.nextLine();
+//        System.out.println("Please add task due date");
+//        tasks[tasks.length - 1][1] = scan_addTask.nextLine();
+//        System.out.println("Is your task important: true/false");
+//        tasks[tasks.length - 1][2] = scan_addTask.nextLine();
     }
 
     public static void fileDataToArray()  {
@@ -85,23 +98,23 @@ public class TaskManager {
 
             String[] parts = lestComma.split(", "); //division String on parts Array 'comma + space'
 
+//            String[] nameTask = "";
+//            String[] dataTask = "";
+//            String[] importantTask = "";
+
             for (int i = 0; i < parts.length; i = i + 3) {     //readind from Array
-                String nameTask = parts[i];
-                String dataTask = parts[i + 1];
-                String importantTask = parts[i + 2];
+                System.out.println(parts[i] + " " + parts[i + 1] + " " + parts[i + 2]);
 
             }
 
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
 
-        }
-
+          }
 
     }
 
-
-    // list tasks in file
+    // list tasks with file
     public static void listTasks(){
 
             File file = new File(FILE_NAME);
@@ -119,10 +132,5 @@ public class TaskManager {
             System.out.println(reading);
 
     }
-
-
-
-
-
 
 }

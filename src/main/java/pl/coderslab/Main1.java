@@ -51,6 +51,44 @@ public class Main1 {
 
     }
 
+    public static void fileDataToArray()  {
+
+        try {
+            StringBuilder reading = new StringBuilder();
+            File file = new File(FILE_NAME);
+            Scanner scan = new Scanner(file);
+
+            while (scan.hasNextLine()) {
+                reading.append(scan.nextLine()).append(", ");
+
+            }
+
+            String sbToString = reading.toString();     //change StringBuilder to String
+
+            String lestComma = sbToString.substring(0, sbToString.length()-2).trim(); //delete the lest comma = ',' (comm + space) and trim space
+
+            String[] parts = lestComma.split(", "); //division String on parts Array 'comma + space'
+
+//            String[] nameTask = new String[]{""};
+//            String[] dataTask = new String[]{""};
+//            String[] importantTask = new String[]{""};
+//
+//            for (int i = 0; i < parts.length; i = i + 3) {     //readind from Array
+//                nameTask += parts[i];
+//                dataTask += parts[i + 1];
+//                importantTask += parts[i + 2];
+//
+//            }
+
+
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+
+        }
+
+
+    }
+
 
 
     /*String strFile = Arrays.toString(parts);   //change Array to String File
