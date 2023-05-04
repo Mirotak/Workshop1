@@ -2,6 +2,9 @@ package pl.coderslab;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class TaskManager {
@@ -13,7 +16,6 @@ public class TaskManager {
     public static void main(String[] args) {
 
         fileDataToArray();
-       // System.out.println("tasks = " + tasks);
         menu();
 
     }
@@ -43,7 +45,6 @@ public class TaskManager {
 
                 case "add":
                       addTask();
-                    System.out.println("wybrano add");
                     break;
 
                 case "remove":
@@ -65,16 +66,18 @@ public class TaskManager {
 
     public static void addTask(){
 
-//        Scanner scan_addTask = new Scanner(System.in);
-//          reading.append(scan.nextLine()).append(", ");
-//        tasks = Arrays.copyOf(tasks, tasks.length +1);
-//        tasks[tasks.length - 1] = new String[3];
-//        System.out.println("Please add task description");
-//        tasks[tasks.length - 1][0] = scan_addTask.nextLine();
-//        System.out.println("Please add task due date");
-//        tasks[tasks.length - 1][1] = scan_addTask.nextLine();
-//        System.out.println("Is your task important: true/false");
-//        tasks[tasks.length - 1][2] = scan_addTask.nextLine();
+        Scanner scanner = new Scanner(System.in);
+            System.out.println("task data: desriptions, due date, important:(true/false) (data separate : comma + space ', ')");
+            String sentance = scanner.nextLine();
+
+            try (FileWriter fileWriter = new FileWriter("tasks1.csv", true)) {
+                fileWriter.append(sentance + "\n");
+
+            } catch (IOException exception) {
+                exception.printStackTrace();
+
+              }
+
     }
 
     public static void fileDataToArray() {
@@ -105,7 +108,6 @@ public class TaskManager {
             System.out.println("File not found");
 
         }
-
 
     }
 

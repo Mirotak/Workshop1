@@ -2,6 +2,7 @@ package pl.coderslab;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,41 +18,76 @@ public class Main1 {
     public static void main(String[] args) {
 
 
-          /*  File file = new File("tasks1.csv");
-            try {
-                Scanner scan = new Scanner(file);
-                String str = "";
+        Scanner scanner = new Scanner(System.in);
+        //   boolean isWorking = true;
 
-                while (scan.hasNextLine()) {
-                    str += scan.nextLine() + ",";
+        //    while (isWorking) {
+        System.out.println("task data: desriptions, due date, important:(true/false) (data separate : comma + space ', ')");
+        String sentance = scanner.nextLine();
+        //       if (sentance.equals("quit")) {
+        //           isWorking = false;
+        //     } else {
+        // zapis do pliku sentance
+        try (FileWriter fileWriter = new FileWriter("tasks1.csv", true)) {
+            fileWriter.append(sentance + "\n");
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
 
+        //     }
+        //   }
+
+        ///////////////////////////////////////wczytanie z pliku
+        File file = new File("tasks1.csv");
+        StringBuilder sbReading = new StringBuilder();
+        try {
+            Scanner scan = new Scanner(file);
+            while (scan.hasNextLine()) {
+                sbReading.append(scan.nextLine() + "\n");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+        System.out.println(sbReading);
+
+      /*  ///////////wpisanie do pliku
+        Scanner scanner = new Scanner(System.in);
+        boolean isWorking = true;
+
+        while (isWorking) {
+            System.out.print("Wprowadz: Nazwisko Imie RokUrodzenia Płeć: (dane oddziel spacją ) ( quit - wyjście)");
+            String sentance = scanner.nextLine();
+            if (sentance.equals("quit")) {
+                isWorking = false;
+            } else {
+                // zapis do pliku sentance
+                try (FileWriter fileWriter = new FileWriter("text1.csv", true)) {
+                    fileWriter.append(sentance + "\n");
+                } catch (IOException exception) {
+                    exception.printStackTrace();
                 }
-                String[] strArr = str.split(","); //change String on array
 
-                System.out.println("strArr = " + Arrays.toString(strArr));
+            }
+        }
 
-                for (int i = 0; i < 9; i = i + 3) {
-                    System.out.println("strArr = " + strArr[i]);
-
-                }
-
-                String strFile = Arrays.toString(strArr);   //change Array to String File
-                Path path1 = Paths.get("text5a.txt");   //create file
-                Files.writeString(path1,strFile);           // copy String text to File
-
-            } catch (FileNotFoundException e) {
-                System.out.println("File not found !");
-
-              } catch (IOException ex){
-                System.out.println("File cannot be saved !");
-
-                }*/
-
-        fileDataToArray();
+        ///////////////////////////////////////wczytanie z pliku
+        File file = new File("text1.csv");
+        StringBuilder sbReading = new StringBuilder();
+        try {
+            Scanner scan = new Scanner(file);
+            while (scan.hasNextLine()) {
+                sbReading.append(scan.nextLine() + "\n");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+        }
+        System.out.println(sbReading);
+*/
+       // fileDataToArray();
 
     }
 
-    public static void fileDataToArray()  {
+   /* public static void fileDataToArray()  {
 
         try {
             StringBuilder reading = new StringBuilder();
@@ -92,7 +128,7 @@ public class Main1 {
         }
 
 
-    }
+    }*/
 
 
 
@@ -192,4 +228,30 @@ public class Main1 {
             System.out.println("i = " + i);
         }
     }*/
+
+    /*   ////////////////////////////////////// wprowadzenie danych w linii do stringa[]
+
+        Scanner scan = new Scanner(System.in);
+        Boolean isWork = false;
+
+        String data = "";
+
+        while (!isWork == true) {
+
+            System.out.println("Wprowadz: Nazwisko Imie RokUrodzenia Płeć: (dane oddziel spacją ) ( quit - wyjście)");
+
+            if (data.equals("quit")) {
+                System.out.println("data = " + data);
+                isWork = true;
+            } else {
+                data += scan.nextLine() + "\n";
+                // data = scan.nextLine() + "\n";
+                String[] arrData = data.split(" \n");
+                System.out.println(data);
+                System.out.println(Arrays.toString(arrData));
+            }
+        }
+        //System.out.println(data);*/
+
+
 }
