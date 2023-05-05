@@ -13,12 +13,12 @@ import java.util.Scanner;
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
 public class Main1 {
-    static final String FILE_NAME = "tasks1.csv";
+    static final String FILE_NAME = "tasks.csv";
     static String[][] tasks;
     public static void main(String[] args) {
 
 
-        Scanner scanner = new Scanner(System.in);
+     /*   Scanner scanner = new Scanner(System.in);
         //   boolean isWorking = true;
 
         //    while (isWorking) {
@@ -28,7 +28,7 @@ public class Main1 {
         //           isWorking = false;
         //     } else {
         // zapis do pliku sentance
-        try (FileWriter fileWriter = new FileWriter("tasks1.csv", true)) {
+        try (FileWriter fileWriter = new FileWriter("tasks.csv", true)) {
             fileWriter.append(sentance + "\n");
         } catch (IOException exception) {
             exception.printStackTrace();
@@ -38,7 +38,7 @@ public class Main1 {
         //   }
 
         ///////////////////////////////////////wczytanie z pliku
-        File file = new File("tasks1.csv");
+        File file = new File("tasks.csv");
         StringBuilder sbReading = new StringBuilder();
         try {
             Scanner scan = new Scanner(file);
@@ -48,7 +48,7 @@ public class Main1 {
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
-        System.out.println(sbReading);
+        System.out.println(sbReading);*/
 
       /*  ///////////wpisanie do pliku
         Scanner scanner = new Scanner(System.in);
@@ -178,7 +178,7 @@ public class Main1 {
     /*private static void getList(){
         tasks = new String[0][3];
         try{
-            for(String s : Files.readAllLines(Path.of("tasks1.csv"))) {
+            for(String s : Files.readAllLines(Path.of("tasks.csv"))) {
                 String[] nextTab = s.trim().split(",");
                 tasks = Arrays.copyOf(tasks, tasks.length + 1);
                 tasks[tasks.length - 1] = nextTab;

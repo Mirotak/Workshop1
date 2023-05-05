@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class TaskManager {
-    static final String FILE_NAME = "tasks1.csv"; //worked file delete 'tasks1.csv' and please change on 'tasks.csv'
+    static final String FILE_NAME = "tasks.csv";
     static final String[] OPTIONS = {"add", "remove", "list", "exit"};
     static String[][] tasks;
 
@@ -48,8 +48,7 @@ public class TaskManager {
                     break;
 
                 case "remove":
-                    // removeTask();
-                    System.out.println("wybrano remove");
+                    removeTask();
                     break;
 
                 case "list":
@@ -64,13 +63,19 @@ public class TaskManager {
         }
     }
 
+    public static void removeTask(){
+
+        System.out.println("option : REMOVE TASKS");
+
+    }
+
     public static void addTask(){
 
         Scanner scanner = new Scanner(System.in);
             System.out.println("task data: desriptions, due date, important:(true/false) (data separate : comma + space ', ')");
             String sentance = scanner.nextLine();
 
-            try (FileWriter fileWriter = new FileWriter("tasks1.csv", true)) {
+            try (FileWriter fileWriter = new FileWriter("tasks.csv", true)) {
                 fileWriter.append(sentance + "\n");
 
             } catch (IOException exception) {
