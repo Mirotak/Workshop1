@@ -1,5 +1,7 @@
 package pl.coderslab;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -21,9 +23,7 @@ public class TaskManager {
         fileDataToArray();
         menu();
 
-      //  removeTask();
-
-
+       // removeTask();
 
     }
 
@@ -32,7 +32,7 @@ public class TaskManager {
 
         Scanner scan = new Scanner(System.in);
         boolean isRunMenu = true;
-        while (isRunMenu) {                 //repeat until the condition 'isRuMenu' is true
+        while (isRunMenu) {                 //repeat until the condition 'isRunMenu' is true
             System.out.println(ConsoleColors.BLUE_BOLD + "Please select an option:" + ConsoleColors.RESET);
             for (int i = 0; i < OPTIONS.length; i++) {
                 System.out.println();
@@ -46,7 +46,7 @@ public class TaskManager {
 
             switch (selectWithMenu) {
                 case "exit":
-                    System.out.println("wybrano exit");
+                    System.out.println("");
                     isRunMenu = false;
                     break;
 
@@ -70,51 +70,52 @@ public class TaskManager {
         }
     }
 
-    public static String[][] removeTask() {
+    public static void removeTask() {
 
-        System.out.print("Please select number to remove.");
-        Scanner scanNr = new Scanner(System.in);
+        // wyswietlenie listy z tablicy z indeksem do usuniecia
+        for (int i = 0; i < tasks.length; i++) {
+            System.out.print(i + ": " + Arrays.toString(tasks[i]) + "\n");
 
-        //  File file = new File(FILE_NAME);
-        //  Path path = Paths.get(FILE_NAME);
-        Path file = Paths.get(FILE_NAME);
-
-        try {
-            // int lineCount = (int) Files.lines(path).count(); // option : int lineCount = (int) Files.lines(Paths.get(FILE_NAME)).count();
-
-            int lineCount = (int) Files.lines(Paths.get(FILE_NAME)).count();
-            Scanner scan = new Scanner(file);
-            tasks = new String[lineCount][3];
-            for (int i = 0; i < lineCount; i++) {
-                String line = scan.nextLine();
-                String[] parts = line.split(", ");
-                for (int j = 0; j < 3; j++) {
-                    tasks[i][j] = parts[j];
-
-                }
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found.");
-        } catch (IOException ex) {
-            ex.printStackTrace();
         }
+        //sprawdzanie czy oba warunki sa spelnione czy jest wprowadzana liczba całkowita oraz czy mieści sie w zakresie tablicy
+        int nrTaskToDelete = -1;
+        boolean validation = false;
+        while (!validation){
+            //wprowadzenie nr indeksu zadania do usuniecia
+            System.out.println("Please select number to remove. ( 0 - " + (tasks.length - 1) + " )");
+            Scanner scan = new Scanner(System.in);
 
-        return tasks;
+            while (!scan.hasNextInt()) {                                          //sprawdzenie czy wprowadzana tekst jest liczba całkowitą
+                scan.next();                                                     //odczytanie wprowadzonego tekstu
+                System.out.print("Incorrect data. Try again.");
+            }
+
+            nrTaskToDelete = scan.nextInt();                                    // przypisanie zmiennej wprowadzonej wartości
+
+            if ((nrTaskToDelete >= 0) && (nrTaskToDelete < (tasks.length))) {   //sprawdzenie czy istnieje zadanie o podanym indeksie
+                validation = true;                                              //podany indeks zadania jest prawidłowy
+            } else {
+                validation = false;                                             //podany indeks zadania jest poza dostępnym zakresem
+
+            }
+
+        }
+        tasks = ArrayUtils.remove(tasks, nrTaskToDelete);                       //usuniecie zadania o wybranym indeksie
+
+        // optional - display array after delete task
+        /*for (int i = 0; i < tasks.length; i++) {
+            System.out.print(i + ": " + Arrays.toString(tasks[i]) + "\n");
+
+        }*/
     }
 
 
-      /*  public static String[][] removeTask1(){
+        public static String[][] fileDataToArray(){
 
-        System.out.print("Please select number to remove.");
         Scanner scanNr = new Scanner(System.in);
-
-      //  File file = new File(FILE_NAME);
-      //  Path path = Paths.get(FILE_NAME);
         Path file = Paths.get(FILE_NAME);
 
         try {
-           // int lineCount = (int) Files.lines(path).count(); // option : int lineCount = (int) Files.lines(Paths.get(FILE_NAME)).count();
-
             int lineCount = (int) Files.lines(Paths.get(FILE_NAME)).count();
             Scanner scan = new Scanner(file);
             tasks = new String[lineCount][3];
@@ -136,7 +137,8 @@ public class TaskManager {
 
         return tasks;
 
-    }*/
+    }
+
 
     public static void addTask(){
 
@@ -154,7 +156,7 @@ public class TaskManager {
 
     }
 
-    public static void fileDataToArray() {
+   /* public static void fileDataToArray() {
 
         try {
             StringBuilder reading = new StringBuilder();
@@ -183,7 +185,7 @@ public class TaskManager {
 
         }
 
-    }
+    }*/
 
     // list tasks with file
     public static void listTasks(){
