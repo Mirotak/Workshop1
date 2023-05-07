@@ -1,13 +1,15 @@
 package pl.coderslab;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
@@ -16,6 +18,85 @@ public class Main1 {
     static final String FILE_NAME = "tasks.csv";
     static String[][] tasks;
     public static void main(String[] args) {
+
+    //// tablica dwuwymiarowa i usuwanie linii
+        String[][] firstNames = {
+                        {"Abigail", "Alexandra", "Alison", "Amanda"},
+                        {"aaaa", "ssssss", "dddddd", "fffff"},
+                        {"attt", "stttts", "dtttyd", "rtfgg"}
+                };
+
+        // wyswietlenie listy z tablicy z indeksem do usuniecia
+        for (int i = 0; i < firstNames.length; i++) {
+            System.out.print(i + ": " + Arrays.toString(firstNames[i]) + "\n");
+
+        }
+            //sprawdzanie czy oba warunki sa spelnione czy jest wprowadzana liczba całkowita oraz czy mieści sie w zakresie tablicy
+            int nrTaskToDelete = -1;
+            boolean validation = false;
+            while (!validation){
+                //wprowadzenie nr indeksu zadania do usuniecia
+                System.out.println("Please select number to remove. ( 0 - " + (firstNames.length - 1) + " )");
+                Scanner scan = new Scanner(System.in);
+
+                while (!scan.hasNextInt()) { //sprawdzenie czy wprowadzana tekst jest liczba całkowitą
+                scan.next();             //odczytanie wprowadzonego tekstu
+                System.out.print("Incorrect data. Try again.");
+                }
+
+                nrTaskToDelete = scan.nextInt();    // przypisanie zmiennej wprowadzonej warotsci
+
+                if ((nrTaskToDelete >= 0) && (nrTaskToDelete < (firstNames.length))) { //sprawdzenie czy istnieje zdaanie o podanym indeksie
+                    validation = true; //podany index zadania jest prawidłowy
+                } else {
+                    validation = false; //podany iondex zadania jest poza dostępnym zakresem
+
+                  }
+
+            }
+
+        firstNames = ArrayUtils.remove(firstNames, nrTaskToDelete); //usuniecie zadania o wybranym indexie
+
+        for (int i = 0; i < firstNames.length; i++) {
+            System.out.print(i + ": " + Arrays.toString(firstNames[i]) + "\n");
+
+        }
+
+
+
+       /*
+        for (int i = 0; i < firstNames.length; i++) {
+
+
+            System.out.print(i + ": " + Arrays.toString(firstNames[i]) + "\n");
+            System.out.println(Arrays.toString(firstNames)); // wyświetlamy testowo jej elementy
+
+
+
+
+            System.out.print(i + ": " + Arrays.toString(tabDel[i]) + "\n");
+
+        }*/
+
+
+
+             //   System.out.println(Arrays.toString(firstNames)); // wyświetlamy testowo jej elementy
+
+               // firstNames = ArrayUtils.remove(firstNames, 0); //
+
+              //  System.out.println(Arrays.toString(firstNames));
+
+/////////////////////////////////////////////////////////////////////////////
+
+
+        /*//// utworzenie pliku i zapisanie do niego dwoch linii; opcja append : false - nadpisanie pliku ; true - dopisanie do pliku;
+        try (FileWriter fileWriter = new FileWriter("writeFile.txt", false)){
+            fileWriter.append("first line\n");
+            fileWriter.append("second line\n");
+        } catch (IOException ex) {
+            System.out.println("Błąd zapisu do pliku.");
+        }*/
+
 
 
      /*   Scanner scanner = new Scanner(System.in);

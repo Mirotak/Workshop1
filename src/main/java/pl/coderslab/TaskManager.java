@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -17,6 +20,10 @@ public class TaskManager {
 
         fileDataToArray();
         menu();
+
+      //  removeTask();
+
+
 
     }
 
@@ -63,11 +70,73 @@ public class TaskManager {
         }
     }
 
-    public static void removeTask(){
+    public static String[][] removeTask() {
 
-        System.out.println("option : REMOVE TASKS");
+        System.out.print("Please select number to remove.");
+        Scanner scanNr = new Scanner(System.in);
 
+        //  File file = new File(FILE_NAME);
+        //  Path path = Paths.get(FILE_NAME);
+        Path file = Paths.get(FILE_NAME);
+
+        try {
+            // int lineCount = (int) Files.lines(path).count(); // option : int lineCount = (int) Files.lines(Paths.get(FILE_NAME)).count();
+
+            int lineCount = (int) Files.lines(Paths.get(FILE_NAME)).count();
+            Scanner scan = new Scanner(file);
+            tasks = new String[lineCount][3];
+            for (int i = 0; i < lineCount; i++) {
+                String line = scan.nextLine();
+                String[] parts = line.split(", ");
+                for (int j = 0; j < 3; j++) {
+                    tasks[i][j] = parts[j];
+
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found.");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        return tasks;
     }
+
+
+      /*  public static String[][] removeTask1(){
+
+        System.out.print("Please select number to remove.");
+        Scanner scanNr = new Scanner(System.in);
+
+      //  File file = new File(FILE_NAME);
+      //  Path path = Paths.get(FILE_NAME);
+        Path file = Paths.get(FILE_NAME);
+
+        try {
+           // int lineCount = (int) Files.lines(path).count(); // option : int lineCount = (int) Files.lines(Paths.get(FILE_NAME)).count();
+
+            int lineCount = (int) Files.lines(Paths.get(FILE_NAME)).count();
+            Scanner scan = new Scanner(file);
+            tasks = new String[lineCount][3];
+            for (int i = 0; i < lineCount; i++) {
+                String line = scan.nextLine();
+                String[] parts = line.split(", ");
+                for (int j = 0; j < 3; j++){
+                    tasks[i][j] = parts[j];
+
+                }
+            }
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("File not found.");
+        }
+        catch (IOException ex){
+            ex.printStackTrace();
+        }
+
+        return tasks;
+
+    }*/
 
     public static void addTask(){
 
