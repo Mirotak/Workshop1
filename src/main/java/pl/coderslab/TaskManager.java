@@ -126,6 +126,7 @@ public class TaskManager {
             int lineCount = (int) Files.lines(Paths.get(FILE_NAME)).count();
             Scanner scan = new Scanner(file);
             tasks = new String[lineCount][3];
+
             for (int i = 0; i < lineCount; i++) {
                 String line = scan.nextLine();
                 String[] parts = line.split(", ");
@@ -134,23 +135,23 @@ public class TaskManager {
 
                 }
             }
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             System.out.println("File not found.");
-        }
-        catch (IOException ex){
-            ex.printStackTrace();
-        }
+
+          } catch (IOException ex){
+              ex.printStackTrace();
+
+            }
 
         return tasks;
-
     }
 
 
     public static void addTask(){
 
         Scanner scanner = new Scanner(System.in);
-            System.out.println(ConsoleColors.YELLOW_BOLD + "task data: desriptions, due date, important:(true/false) (data separate : comma + space ', ')" + ConsoleColors.RESET);
+            System.out.println(ConsoleColors.YELLOW_BOLD);
+            System.out.println("task data: desriptions, due date, important:(true/false) (data separate : comma + space ', ')" + ConsoleColors.RESET);
             String sentance = scanner.nextLine();
 
             try (FileWriter fileWriter = new FileWriter(FILE_NAME, true)) {
@@ -177,6 +178,7 @@ public class TaskManager {
                 }
             } catch (FileNotFoundException e) {
                 System.out.println("File not found");
+
             }
             System.out.println(reading);
 
