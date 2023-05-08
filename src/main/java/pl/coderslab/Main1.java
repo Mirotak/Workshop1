@@ -19,16 +19,18 @@ public class Main1 {
     static String[][] tasks;
     public static void main(String[] args) {
 
+        fileDataToArray();
+
     //// tablica dwuwymiarowa i usuwanie linii
-        String[][] firstNames = {
+        /*String[][] firstNames = {
                         {"Abigail", "Alexandra", "Alison", "Amanda"},
                         {"aaaa", "ssssss", "dddddd", "fffff"},
                         {"attt", "stttts", "dtttyd", "rtfgg"}
-                };
+                };*/
 
         // wyswietlenie listy z tablicy z indeksem do usuniecia
-        for (int i = 0; i < firstNames.length; i++) {
-            System.out.print(i + ": " + Arrays.toString(firstNames[i]) + "\n");
+        for (int i = 0; i < tasks.length; i++) {
+            System.out.print(i + ": " + Arrays.toString(tasks[i]) + "\n");
 
         }
             //sprawdzanie czy oba warunki sa spelnione czy jest wprowadzana liczba całkowita oraz czy mieści sie w zakresie tablicy
@@ -36,7 +38,7 @@ public class Main1 {
             boolean validation = false;
             while (!validation){
                 //wprowadzenie nr indeksu zadania do usuniecia
-                System.out.println("Please select number to remove. ( 0 - " + (firstNames.length - 1) + " )");
+                System.out.println("Please select number to remove. ( 0 - " + (tasks.length - 1) + " )");
                 Scanner scan = new Scanner(System.in);
 
                 while (!scan.hasNextInt()) { //sprawdzenie czy wprowadzana tekst jest liczba całkowitą
@@ -46,7 +48,7 @@ public class Main1 {
 
                 nrTaskToDelete = scan.nextInt();    // przypisanie zmiennej wprowadzonej warotsci
 
-                if ((nrTaskToDelete >= 0) && (nrTaskToDelete < (firstNames.length))) { //sprawdzenie czy istnieje zdaanie o podanym indeksie
+                if ((nrTaskToDelete >= 0) && (nrTaskToDelete < (tasks.length))) { //sprawdzenie czy istnieje zdaanie o podanym indeksie
                     validation = true; //podany index zadania jest prawidłowy
                 } else {
                     validation = false; //podany iondex zadania jest poza dostępnym zakresem
@@ -55,28 +57,52 @@ public class Main1 {
 
             }
 
-        firstNames = ArrayUtils.remove(firstNames, nrTaskToDelete); //usuniecie zadania o wybranym indexie
+        String[][] tasks_buf = ArrayUtils.remove(tasks, nrTaskToDelete); //usuniecie zadania o wybranym indexie
 
-        for (int i = 0; i < firstNames.length; i++) {
-            System.out.print(i + ": " + Arrays.toString(firstNames[i]) + "\n");
+      //  System.out.println("tasks = " + tasks_buf);
 
+
+
+        try (PrintWriter printWriter = new PrintWriter("printWriter.csv")) {
+            for (int i = 0; i < tasks_buf.length; i++){
+                printWriter.println(StringUtils.join(tasks_buf[i], ", "));
+            }
+        }
+        catch(FileNotFoundException exception){
+            exception.printStackTrace();
         }
 
 
+            //// utworzenie pliku i zapisanie do niego dwoch linii; opcja append : false - nadpisanie pliku ; true - dopisanie do pliku;
+//            try (PrintWriter printWriter = new PrintWriter("printwriter.csv")){
 
-       /*
-        for (int i = 0; i < firstNames.length; i++) {
+//                for (int i = 0; i < tasks_buf.length; i++) {
+//
+//                    tasks_buf[i] = tasks[i];
+//                    if (i >= nrTaskToDelete){
+//                        tasks_buf[i] = tasks[i+1];
+//                        //fileWriter.append(sentance + "\n");
+//
+//
+//                    }
+//                   // System.out.println("tasks_buf[i] = " + i + " : " + Arrays.toString(tasks_buf[i]));
+//                }
+//                tasks[][] = Arrays.copyOf(tasks_buf,tasks_buf.length-1);
+//
+//                for (int i = 0; i < tasks_buf.length; i++) {
+//                    System.out.println("tasks_buf[i] = " + tasks_buf[i]);
+//                }
+//                for (int i = 0; i < tasks.length; i++) {
+//                    System.out.println("tasks[i] = " + tasks[i]);
+//                }
+//
+               // System.out.println("Arrays.toString(tasks) = " + Arrays.toString(tasks));
 
+//            } catch (IOException ex) {
+//                System.out.println("Błąd zapisu do pliku.");
+//
+//            }
 
-            System.out.print(i + ": " + Arrays.toString(firstNames[i]) + "\n");
-            System.out.println(Arrays.toString(firstNames)); // wyświetlamy testowo jej elementy
-
-
-
-
-            System.out.print(i + ": " + Arrays.toString(tabDel[i]) + "\n");
-
-        }*/
 
 
 
@@ -165,6 +191,35 @@ public class Main1 {
         System.out.println(sbReading);
 */
        // fileDataToArray();
+
+    }
+
+    public static String[][] fileDataToArray(){
+
+        Scanner scanNr = new Scanner(System.in);
+        Path file = Paths.get(FILE_NAME);
+
+        try {
+            int lineCount = (int) Files.lines(Paths.get(FILE_NAME)).count();
+            Scanner scan = new Scanner(file);
+            tasks = new String[lineCount][3];
+            for (int i = 0; i < lineCount; i++) {
+                String line = scan.nextLine();
+                String[] parts = line.split(", ");
+                for (int j = 0; j < 3; j++){
+                    tasks[i][j] = parts[j];
+
+                }
+            }
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("File not found.");
+        }
+        catch (IOException ex){
+            ex.printStackTrace();
+        }
+
+        return tasks;
 
     }
 

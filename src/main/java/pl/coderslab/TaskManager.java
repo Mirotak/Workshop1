@@ -1,11 +1,9 @@
 package pl.coderslab;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -22,8 +20,6 @@ public class TaskManager {
 
         fileDataToArray();
         menu();
-
-       // removeTask();
 
     }
 
@@ -46,7 +42,7 @@ public class TaskManager {
 
             switch (selectWithMenu) {
                 case "exit":
-                    System.out.println("");
+                    System.out.println(ConsoleColors.CYAN_BOLD + "See you next time." + ConsoleColors.RESET);
                     isRunMenu = false;
                     break;
 
@@ -72,35 +68,46 @@ public class TaskManager {
 
     public static void removeTask() {
 
-        // wyswietlenie listy z tablicy z indeksem do usuniecia
-        for (int i = 0; i < tasks.length; i++) {
+        // list of the array with the index to be deleted
+        /*for (int i = 0; i < tasks.length; i++) {
             System.out.print(i + ": " + Arrays.toString(tasks[i]) + "\n");
 
-        }
-        //sprawdzanie czy oba warunki sa spelnione czy jest wprowadzana liczba całkowita oraz czy mieści sie w zakresie tablicy
+        }*/
+        listTasks();
+        //checking if both conditions are met if an integer is being entered and if it is within the range of the array
         int nrTaskToDelete = -1;
         boolean validation = false;
         while (!validation){
-            //wprowadzenie nr indeksu zadania do usuniecia
+            //enter the index number of the task to be deleted
             System.out.println("Please select number to remove. ( 0 - " + (tasks.length - 1) + " )");
             Scanner scan = new Scanner(System.in);
 
-            while (!scan.hasNextInt()) {                                          //sprawdzenie czy wprowadzana tekst jest liczba całkowitą
-                scan.next();                                                     //odczytanie wprowadzonego tekstu
+            while (!scan.hasNextInt()) {                                          //check if the entered text is an integer
+                scan.next();                                                     //read the entered text
                 System.out.print("Incorrect data. Try again.");
             }
 
-            nrTaskToDelete = scan.nextInt();                                    // przypisanie zmiennej wprowadzonej wartości
+            nrTaskToDelete = scan.nextInt();                                    // assigning the entered value to the variable
 
-            if ((nrTaskToDelete >= 0) && (nrTaskToDelete < (tasks.length))) {   //sprawdzenie czy istnieje zadanie o podanym indeksie
-                validation = true;                                              //podany indeks zadania jest prawidłowy
+            if ((nrTaskToDelete >= 0) && (nrTaskToDelete < (tasks.length))) {   //check if there is a task with the given index
+                validation = true;                                              //the specified job index is valid
             } else {
-                validation = false;                                             //podany indeks zadania jest poza dostępnym zakresem
+                validation = false;                                             //the specified job index is outside the available range
 
             }
 
         }
-        tasks = ArrayUtils.remove(tasks, nrTaskToDelete);                       //usuniecie zadania o wybranym indeksie
+        tasks = ArrayUtils.remove(tasks, nrTaskToDelete);                       //delete the task with the selected index
+        System.out.println(ConsoleColors.GREEN_BOLD + "Value was successfully deleted." + ConsoleColors.RESET);
+
+        try (PrintWriter printWriter = new PrintWriter(FILE_NAME)) {
+            for (int i = 0; i < tasks.length; i++){
+                printWriter.println(StringUtils.join(tasks[i], ", "));
+            }
+        }
+        catch(FileNotFoundException exception){
+            exception.printStackTrace();
+        }
 
         // optional - display array after delete task
         /*for (int i = 0; i < tasks.length; i++) {
@@ -110,7 +117,7 @@ public class TaskManager {
     }
 
 
-        public static String[][] fileDataToArray(){
+    public static String[][] fileDataToArray(){
 
         Scanner scanNr = new Scanner(System.in);
         Path file = Paths.get(FILE_NAME);
@@ -143,10 +150,10 @@ public class TaskManager {
     public static void addTask(){
 
         Scanner scanner = new Scanner(System.in);
-            System.out.println("task data: desriptions, due date, important:(true/false) (data separate : comma + space ', ')");
+            System.out.println(ConsoleColors.YELLOW_BOLD + "task data: desriptions, due date, important:(true/false) (data separate : comma + space ', ')" + ConsoleColors.RESET);
             String sentance = scanner.nextLine();
 
-            try (FileWriter fileWriter = new FileWriter("tasks.csv", true)) {
+            try (FileWriter fileWriter = new FileWriter(FILE_NAME, true)) {
                 fileWriter.append(sentance + "\n");
 
             } catch (IOException exception) {
@@ -155,37 +162,6 @@ public class TaskManager {
               }
 
     }
-
-   /* public static void fileDataToArray() {
-
-        try {
-            StringBuilder reading = new StringBuilder();
-            File file = new File(FILE_NAME);
-            Scanner scan = new Scanner(file);
-
-            while (scan.hasNextLine()) {
-                reading.append(scan.nextLine()).append(", ");
-
-            }
-
-            String sbToString = reading.toString();     //change StringBuilder to String
-
-            String lestComma = sbToString.substring(0, sbToString.length() - 2).trim(); //delete the lest comma = ',' (comm + space) and trim space
-
-            String[] parts = lestComma.split(", ");
-
-
-            for (int i = 0; i < parts.length; i = i + 3) {     //readind from Array
-                System.out.println(parts[i] + " " + parts[i + 1] + " " + parts[i + 2]);
-
-            }
-
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found");
-
-        }
-
-    }*/
 
     // list tasks with file
     public static void listTasks(){
